@@ -1,0 +1,36 @@
+.container {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  width: 5em;
+}
+h2 {
+  color: white;
+  font-weight: 500;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+li {
+  padding: 1em;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
