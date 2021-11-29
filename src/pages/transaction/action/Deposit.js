@@ -26,7 +26,7 @@ const Deposit = () => {
           <div className="modal-content">
             <h2>DEPOSIT FORM</h2>
             <br />
-            <p>Deposit yout 1 million</p>
+            <p>Deposit your 1 million</p>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>
