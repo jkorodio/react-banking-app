@@ -1,9 +1,10 @@
 .container {
-  background-color: black;
+  background-color: rgb(233, 241, 213);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1em;
+  box-shadow: 0 0 10px 8px #c4c3c3;
 }
 
 .header-left {
@@ -14,10 +15,12 @@
 img {
   width: 5em;
 }
+
 h2 {
   color: white;
   font-weight: 500;
 }
+
 .header-right {
   display: flex;
   align-items: center;
@@ -32,5 +35,5 @@ li {
 }
 a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
