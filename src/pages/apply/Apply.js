@@ -1,10 +1,9 @@
 import React from "react";
-import Form from "./Form/Form";
+import Form from "./form/Form";
 
-const Register = () => {
+const Apply = () => {
   return (
     <div>
-      <h1>REGISTER PAGE</h1>
       <form>
         <Form />
       </form>
@@ -12,4 +11,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Apply;
