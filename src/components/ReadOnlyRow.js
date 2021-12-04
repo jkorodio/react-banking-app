@@ -9,13 +9,18 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
       <td>{contact.email}</td>
       <td>
         <button
+          style={{ padding: "5px", width: "2.5rem" }}
           type="button"
           onClick={event => handleEditClick(event, contact)}
         >
-          Edit
+          🖊
         </button>
-        <button type="button" onClick={() => handleDeleteClick(contact.id)}>
-          Delete
+        <button
+          style={{ padding: "5px", width: "2.5rem" }}
+          type="button"
+          onClick={() => handleDeleteClick(contact.id)}
+        >
+          🗑
         </button>
       </td>
     </tr>
