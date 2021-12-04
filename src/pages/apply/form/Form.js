@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Form.css";
 
 const Form = () => {
+  const [inputs, setInputs] = useState("");
+
+  const handleChange = (e) => {
+    const username = e.target.username;
+    const value = e.target.value;
+    setInputs((value) => ({ ...value, [username]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs);
+  };
+
   return (
-    <div className="form-container">
+    <div className="form-container" onSubmit={handleSubmit}>
       <div className="form">
         <h1>Open your bank account with us today!</h1>
         <div className="form-inputs">
@@ -14,6 +27,8 @@ const Form = () => {
             name="username"
             className="form-input"
             placeholder="Username"
+            value={inputs.username || ""}
+            onChange={handleChange}
           />
         </div>
         <div className="form-inputs">
@@ -36,18 +51,8 @@ const Form = () => {
             placeholder="Password"
           />
         </div>
-        {/* <div className="form-inputs">
-          <label className="form-label">Confirm Password</label>
-          <input
-            id="password2"
-            type="password"
-            name="password2"
-            className="form-input"
-            placeholder="Confirm Password"
-          />
-        </div> */}
         <button className="form-input-btn" type="submit">
-          Submit
+          Sign Up
         </button>
       </div>
     </div>
