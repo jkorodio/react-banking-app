@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
+  const [login, setLogin] = useState(true);
+
+  const handleClick = () => {
+    setLogin(!login);
+  };
+
   return (
     <div className="container">
       <div className="header-left">
         <img
+          onClick={handleClick}
           src="https://www.freepnglogos.com/uploads/f-e-letter-logo-image-6.png"
           alt=""
         />{" "}
@@ -14,10 +22,7 @@ const Header = () => {
       <div className="header-right-container">
         <ul>
           <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/register">Apply</Link>
+            <Link to="/apply">Apply</Link>
           </li>
           <li>
             <Link to="/customer">Customer</Link>

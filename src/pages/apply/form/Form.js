@@ -4,13 +4,13 @@ import "./Form.css";
 const Form = () => {
   const [inputs, setInputs] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const username = e.target.username;
-    const value = e.target.value;
-    setInputs((value) => ({ ...value, [username]: value }));
+    // const value = e.target.value;
+    setInputs(value => ({ ...value, [username]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log(inputs);
   };
@@ -27,7 +27,6 @@ const Form = () => {
             name="username"
             className="form-input"
             placeholder="Username"
-            value={inputs.username || ""}
             onChange={handleChange}
           />
         </div>
