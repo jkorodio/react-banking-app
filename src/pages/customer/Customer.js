@@ -1,29 +1,42 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { nanoid } from "nanoid";
 import "./Customer.css";
-import data from "./mock-data.json";
+// import data from "./mock-data.json";
 import EditableRow from "../../components/EdittableRow";
 import ReadOnlyRow from "../../components/ReadOnlyRow";
 // import ReadOnlyRow from "../components/ReadOnlyRow";
 // import EditableRow from "../components/EditableRow";
 
+const getDatafromLS = () => {
+  const data = localStorage.getItem("customer");
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
+
 const Customer = () => {
-  const [contacts, setContacts] = useState(data);
+  const [contacts, setContacts] = useState(getDatafromLS());
   const [addFormData, setAddFormData] = useState({
     fullName: "",
-    address: "",
+    email: "",
     phoneNumber: "",
-    email: ""
+    balance: ""
   });
 
   const [editFormData, setEditFormData] = useState({
     fullName: "",
-    address: "",
+    email: "",
     phoneNumber: "",
-    email: ""
+    balance: ""
   });
 
   const [editContactId, setEditContactId] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("customer", JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleAddFormChange = event => {
     event.preventDefault();
@@ -55,9 +68,9 @@ const Customer = () => {
     const newContact = {
       id: nanoid(),
       fullName: addFormData.fullName,
-      address: addFormData.address,
+      email: addFormData.email,
       phoneNumber: addFormData.phoneNumber,
-      email: addFormData.email
+      balance: addFormData.balance
     };
 
     const newContacts = [...contacts, newContact];
@@ -70,9 +83,9 @@ const Customer = () => {
     const editedContact = {
       id: editContactId,
       fullName: editFormData.fullName,
-      address: editFormData.address,
+      email: editFormData.email,
       phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email
+      balance: editFormData.balance
     };
 
     const newContacts = [...contacts];
@@ -91,9 +104,9 @@ const Customer = () => {
 
     const formValues = {
       fullName: contact.fullName,
-      address: contact.address,
+      email: contact.email,
       phoneNumber: contact.phoneNumber,
-      email: contact.email
+      balance: contact.balance
     };
 
     setEditFormData(formValues);
@@ -122,23 +135,7 @@ const Customer = () => {
           type="text"
           name="fullName"
           required="required"
-          placeholder="Enter a name..."
-          onChange={handleAddFormChange}
-        />
-        <br />
-        <input
-          type="text"
-          name="address"
-          required="required"
-          placeholder="Enter an addres..."
-          onChange={handleAddFormChange}
-        />
-        <br />
-        <input
-          type="text"
-          name="phoneNumber"
-          required="required"
-          placeholder="Enter a phone number..."
+          placeholder="Enter Full Name..."
           onChange={handleAddFormChange}
         />
         <br />
@@ -146,7 +143,23 @@ const Customer = () => {
           type="email"
           name="email"
           required="required"
-          placeholder="Enter an email..."
+          placeholder="Enter an E-mail..."
+          onChange={handleAddFormChange}
+        />
+        <br />
+        <input
+          type="number"
+          name="phoneNumber"
+          required="required"
+          placeholder="Enter a phone number..."
+          onChange={handleAddFormChange}
+        />
+        <br />
+        <input
+          type="text"
+          name="balance"
+          required="required"
+          placeholder="Enter Balance"
           onChange={handleAddFormChange}
         />
         <br />
@@ -157,9 +170,9 @@ const Customer = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
               <th>Email</th>
+              <th>Phone Number</th>
+              <th>Balance</th>
               <th>Actions</th>
             </tr>
           </thead>

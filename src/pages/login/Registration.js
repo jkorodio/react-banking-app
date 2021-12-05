@@ -20,11 +20,8 @@ const Registration = () => {
       setFlag(true);
     } else {
       setFlag(false);
-      localStorage.setItem("hardikSubmissionEmail", JSON.stringify(email));
-      localStorage.setItem(
-        "hardikSubmissionPassword",
-        JSON.stringify(password)
-      );
+      localStorage.setItem("userEmail", JSON.stringify(email));
+      localStorage.setItem("userPassword", JSON.stringify(password));
       console.log("Saved in Local Storage");
 
       setLogin(!login);

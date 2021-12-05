@@ -27,6 +27,7 @@ const Deposit = () => {
             <h2>DEPOSIT FORM</h2>
             <br />
             <p>Deposit your 1 million</p>
+            <input type="text" />
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>

@@ -12,10 +12,8 @@ const Login = () => {
 
   const handleLogin = e => {
     e.preventDefault();
-    let pass = localStorage
-      .getItem("hardikSubmissionPassword")
-      .replace(/"/g, "");
-    let mail = localStorage.getItem("hardikSubmissionEmail").replace(/"/g, "");
+    let pass = localStorage.getItem("userPassword").replace(/"/g, "");
+    let mail = localStorage.getItem("userEmail").replace(/"/g, "");
     // .replace(/"/g,"") is used to remove the double quotes for the string
 
     if (!emaillog || !passwordlog) {
