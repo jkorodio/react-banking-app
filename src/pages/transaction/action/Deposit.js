@@ -26,8 +26,24 @@ const Deposit = () => {
           <div className="modal-content">
             <h2>DEPOSIT FORM</h2>
             <br />
-            <p>Deposit your 1 million</p>
-            <input type="text" />
+            <form>
+              <input
+                style={{ padding: "5px" }}
+                type="text"
+                name="fullName"
+                required="required"
+                placeholder="Enter Full Name..."
+              />
+              <input
+                style={{ padding: "5px" }}
+                type="number"
+                name="balance"
+                required="required"
+                placeholder="Amount deposit..."
+              />
+              <br />
+              <button>submit</button>
+            </form>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>

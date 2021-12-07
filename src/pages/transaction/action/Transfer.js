@@ -26,7 +26,31 @@ const Transfer = () => {
           <div className="modal-content">
             <h2>TRANSFER FORM</h2>
             <br />
-            <p>Transfer your 1 million</p>
+            <form>
+              <input
+                style={{ padding: "5px" }}
+                type="text"
+                name="fullName"
+                required="required"
+                placeholder="Enter Sender Name..."
+              />
+              <input
+                style={{ padding: "5px" }}
+                type="text"
+                name="fullName"
+                required="required"
+                placeholder="Enter Receiver Name..."
+              />
+              <input
+                style={{ padding: "5px" }}
+                type="number"
+                name="balance"
+                required="required"
+                placeholder="Amount transfer..."
+              />
+              <br />
+              <button>submit</button>
+            </form>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>

@@ -33,7 +33,6 @@ const Login = () => {
         <Form style={{ padding: "10rem" }} onSubmit={handleLogin}>
           <h3>LogIn</h3>
           <div className="form-group">
-            <label>Email</label>
             <input
               type="email"
               className="form-control"
@@ -43,7 +42,6 @@ const Login = () => {
           </div>
 
           <div className="form-group">
-            <label>Password</label>
             <input
               type="password"
               className="form-control"

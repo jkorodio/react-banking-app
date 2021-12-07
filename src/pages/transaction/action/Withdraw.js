@@ -26,7 +26,24 @@ const Withdraw = () => {
           <div className="modal-content">
             <h2>WITHDRAW FORM</h2>
             <br />
-            <p>Withdraw your 1 million</p>
+            <form>
+              <input
+                style={{ padding: "5px" }}
+                type="text"
+                name="fullName"
+                required="required"
+                placeholder="Enter Full Name..."
+              />
+              <input
+                style={{ padding: "5px" }}
+                type="number"
+                name="balance"
+                required="required"
+                placeholder="Amount withdraw..."
+              />
+              <br />
+              <button>submit</button>
+            </form>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>

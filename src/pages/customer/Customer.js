@@ -1,11 +1,8 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { nanoid } from "nanoid";
 import "./Customer.css";
-// import data from "./mock-data.json";
-import EditableRow from "../../components/EdittableRow";
-import ReadOnlyRow from "../../components/ReadOnlyRow";
-// import ReadOnlyRow from "../components/ReadOnlyRow";
-// import EditableRow from "../components/EditableRow";
+import EditableRow from "./EdittableRow";
+import ReadOnlyRow from "./ReadOnlyRow";
 
 const getDatafromLS = () => {
   const data = localStorage.getItem("customer");
@@ -17,26 +14,26 @@ const getDatafromLS = () => {
 };
 
 const Customer = () => {
-  const [contacts, setContacts] = useState(getDatafromLS());
+  const [customers, setCustomer] = useState(getDatafromLS());
   const [addFormData, setAddFormData] = useState({
     fullName: "",
     email: "",
-    phoneNumber: "",
+    accNumber: "",
     balance: ""
   });
 
   const [editFormData, setEditFormData] = useState({
     fullName: "",
     email: "",
-    phoneNumber: "",
+    accNumber: "",
     balance: ""
   });
 
-  const [editContactId, setEditContactId] = useState(null);
+  const [editCustomerId, setEditCustomerId] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("customer", JSON.stringify(contacts));
-  }, [contacts]);
+    localStorage.setItem("customer", JSON.stringify(customers));
+  }, [customers]);
 
   const handleAddFormChange = event => {
     event.preventDefault();
@@ -65,65 +62,67 @@ const Customer = () => {
   const handleAddFormSubmit = event => {
     event.preventDefault();
 
-    const newContact = {
+    const newCustomer = {
       id: nanoid(),
       fullName: addFormData.fullName,
       email: addFormData.email,
-      phoneNumber: addFormData.phoneNumber,
+      accNumber: addFormData.accNumber,
       balance: addFormData.balance
     };
 
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+    const newCustomers = [...customers, newCustomer];
+    setCustomer(newCustomers);
   };
 
   const handleEditFormSubmit = event => {
     event.preventDefault();
 
-    const editedContact = {
-      id: editContactId,
+    const editedCustomer = {
+      id: editCustomerId,
       fullName: editFormData.fullName,
       email: editFormData.email,
-      phoneNumber: editFormData.phoneNumber,
+      accNumber: editFormData.accNumber,
       balance: editFormData.balance
     };
 
-    const newContacts = [...contacts];
+    const newCustomers = [...customers];
 
-    const index = contacts.findIndex(contact => contact.id === editContactId);
+    const index = customers.findIndex(
+      customer => customer.id === editCustomerId
+    );
 
-    newContacts[index] = editedContact;
+    newCustomers[index] = editedCustomer;
 
-    setContacts(newContacts);
-    setEditContactId(null);
+    setCustomer(newCustomers);
+    setEditCustomerId(null);
   };
 
-  const handleEditClick = (event, contact) => {
+  const handleEditClick = (event, customer) => {
     event.preventDefault();
-    setEditContactId(contact.id);
+    setEditCustomerId(customer.id);
 
     const formValues = {
-      fullName: contact.fullName,
-      email: contact.email,
-      phoneNumber: contact.phoneNumber,
-      balance: contact.balance
+      fullName: customer.fullName,
+      email: customer.email,
+      accNumber: customer.accNumber,
+      balance: customer.balance
     };
 
     setEditFormData(formValues);
   };
 
   const handleCancelClick = () => {
-    setEditContactId(null);
+    setEditCustomerId(null);
   };
 
-  const handleDeleteClick = contactId => {
-    const newContacts = [...contacts];
+  const handleDeleteClick = customerId => {
+    const newCustomers = [...customers];
 
-    const index = contacts.findIndex(contact => contact.id === contactId);
+    const index = customers.findIndex(customer => customer.id === customerId);
 
-    newContacts.splice(index, 1);
+    newCustomers.splice(index, 1);
 
-    setContacts(newContacts);
+    setCustomer(newCustomers);
   };
 
   return (
@@ -149,14 +148,14 @@ const Customer = () => {
         <br />
         <input
           type="number"
-          name="phoneNumber"
+          name="accNumber"
           required="required"
-          placeholder="Enter a phone number..."
+          placeholder="Enter a account number..."
           onChange={handleAddFormChange}
         />
         <br />
         <input
-          type="text"
+          type="number"
           name="balance"
           required="required"
           placeholder="Enter Balance"
@@ -171,15 +170,15 @@ const Customer = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Phone Number</th>
+              <th>Account Number</th>
               <th>Balance</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map(contact => (
-              <Fragment>
-                {editContactId === contact.id ? (
+            {customers.map(customer => (
+              <>
+                {editCustomerId === customer.id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -187,12 +186,12 @@ const Customer = () => {
                   />
                 ) : (
                   <ReadOnlyRow
-                    contact={contact}
+                    customer={customer}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}
                   />
                 )}
-              </Fragment>
+              </>
             ))}
           </tbody>
         </table>

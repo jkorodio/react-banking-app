@@ -42,7 +42,6 @@ const Registration = () => {
               <h3>Register</h3>
 
               <div className="form-group">
-                <label>Name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -53,7 +52,6 @@ const Registration = () => {
               </div>
 
               <div className="form-group">
-                <label>Email</label>
                 <input
                   type="email"
                   className="form-control"
@@ -63,7 +61,6 @@ const Registration = () => {
               </div>
 
               <div className="form-group">
-                <label>Password</label>
                 <input
                   type="password"
                   className="form-control"
@@ -76,12 +73,16 @@ const Registration = () => {
                 Register
               </button>
               <p className="forgot-password text-right">
-                Already registered{" "}
+                Already registered?{" "}
                 <span
-                  style={{ color: "red", cursor: "pointer" }}
+                  style={{
+                    color: "red",
+                    cursor: "pointer",
+                    textDecoration: "underline"
+                  }}
                   onClick={handleClick}
                 >
-                  log in?
+                  log in
                 </span>
               </p>
               {flag && (
