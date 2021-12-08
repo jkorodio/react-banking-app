@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "../../../components/Modal.css";
+import "./Modal.css";
 
-const Transfer = () => {
+const Transfer = props => {
   const [modal, setModal] = useState(false);
+  const [senderNumber, setSenderNumber] = useState("");
+  const [receiverNumber, setReceiverNumber] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -26,31 +29,42 @@ const Transfer = () => {
           <div className="modal-content">
             <h2>TRANSFER FORM</h2>
             <br />
-            <form>
-              <input
-                style={{ padding: "5px" }}
-                type="text"
-                name="fullName"
-                required="required"
-                placeholder="Enter Sender Name..."
-              />
-              <input
-                style={{ padding: "5px" }}
-                type="text"
-                name="fullName"
-                required="required"
-                placeholder="Enter Receiver Name..."
-              />
-              <input
-                style={{ padding: "5px" }}
-                type="number"
-                name="balance"
-                required="required"
-                placeholder="Amount transfer..."
-              />
-              <br />
-              <button>submit</button>
-            </form>
+            <input
+              style={{ padding: "5px" }}
+              type="text"
+              name="fullName"
+              required="required"
+              placeholder="Sender Account Number..."
+              onChange={e => setSenderNumber(e.target.value)}
+              value={senderNumber}
+            />
+            <input
+              style={{ padding: "5px" }}
+              type="text"
+              name="fullName"
+              required="required"
+              placeholder="Receiver Account Number..."
+              onChange={e => setReceiverNumber(e.target.value)}
+              value={receiverNumber}
+            />
+            <input
+              style={{ padding: "5px" }}
+              type="number"
+              name="balance"
+              required="required"
+              placeholder="Amount transfer..."
+              onChange={e => setAmount(e.target.value)}
+              value={amount}
+            />
+            <br />
+            <button
+              onClick={() => {
+                props.onSubmit(senderNumber, receiverNumber, parseInt(amount));
+                toggleModal();
+              }}
+            >
+              submit
+            </button>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>

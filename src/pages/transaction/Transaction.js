@@ -16,16 +16,26 @@ const getDatafromLS = () => {
 };
 
 const Transaction = () => {
-  const [customers, setCustomer] = useState(getDatafromLS());
-
+  const [customers, setCustomers] = useState(getDatafromLS());
   const [editFormData, setEditFormData] = useState({
     fullName: "",
     email: "",
     accNumber: "",
     balance: ""
   });
-
   const [editCustomerId, setEditCustomerId] = useState(null);
+  const [transactionHistory, setTransactionHistory] = useState(
+    JSON.parse(localStorage.getItem("transaction-history")) || []
+  );
+
+  useEffect(() => {
+    if (transactionHistory.length) {
+      localStorage.setItem(
+        "transaction-history",
+        JSON.stringify(transactionHistory)
+      );
+    }
+  }, [transactionHistory]);
 
   useEffect(() => {
     localStorage.setItem("customer", JSON.stringify(customers));
@@ -62,7 +72,7 @@ const Transaction = () => {
 
     newCustomers[index] = editedCustomer;
 
-    setCustomer(newCustomers);
+    setCustomers(newCustomers);
     setEditCustomerId(null);
   };
 
@@ -91,15 +101,89 @@ const Transaction = () => {
 
     newCustomers.splice(index, 1);
 
-    setCustomer(newCustomers);
+    setCustomers(newCustomers);
   };
 
   return (
     <div className="transaction-container">
       <div className="form2">
-        <Deposit />
-        <Withdraw />
-        <Transfer />
+        <Deposit
+          onSubmit={(accNumber, amount) => {
+            setCustomers(previous => {
+              return previous.map(customer => {
+                if (customer.accNumber === accNumber) {
+                  return {
+                    ...customer,
+                    balance: parseInt(customer.balance) + amount
+                  };
+                } else {
+                  return customer;
+                }
+              });
+            });
+            setTransactionHistory(previous => {
+              const senderName = customers.find(
+                customer => customer.accNumber === accNumber
+              ).fullName;
+              return [...previous, `${senderName} deposit ${amount} pesos`];
+            });
+          }}
+        />
+        <Withdraw
+          onSubmit={(accNumber, amount) => {
+            setCustomers(previous => {
+              return previous.map(customer => {
+                if (customer.accNumber === accNumber) {
+                  return {
+                    ...customer,
+                    balance: parseInt(customer.balance) - amount
+                  };
+                } else {
+                  return customer;
+                }
+              });
+            });
+            setTransactionHistory(previous => {
+              const senderName = customers.find(
+                customer => customer.accNumber === accNumber
+              ).fullName;
+              return [...previous, `${senderName} withdraw ${amount} pesos`];
+            });
+          }}
+        />
+        <Transfer
+          onSubmit={(senderNumber, receiverNumber, amount) => {
+            setCustomers(previous => {
+              return previous.map(customer => {
+                if (customer.accNumber === senderNumber) {
+                  return {
+                    ...customer,
+                    balance: parseInt(customer.balance) - amount
+                  };
+                } else if (customer.accNumber === receiverNumber) {
+                  return {
+                    ...customer,
+                    balance: parseInt(customer.balance) + amount
+                  };
+                } else {
+                  return customer;
+                }
+              });
+            });
+            setTransactionHistory(previous => {
+              const senderName = customers.find(
+                customer => customer.accNumber === senderNumber
+              ).fullName;
+              const receiverName = customers.find(
+                customer => customer.accNumber === receiverNumber
+              ).fullName;
+              return [
+                ...previous,
+                `${senderName} transfered ${amount} pesos to ${receiverName}`
+              ];
+            });
+          }}
+        />
       </div>
       <div className="form1">
         <form onSubmit={handleEditFormSubmit}>

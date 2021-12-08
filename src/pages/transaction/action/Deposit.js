@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import "../../../components/Modal.css";
+import "./Modal.css";
 
-const Deposit = () => {
+const Deposit = props => {
   const [modal, setModal] = useState(false);
+  const [accNumber, setAccNumber] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -26,24 +28,33 @@ const Deposit = () => {
           <div className="modal-content">
             <h2>DEPOSIT FORM</h2>
             <br />
-            <form>
-              <input
-                style={{ padding: "5px" }}
-                type="text"
-                name="fullName"
-                required="required"
-                placeholder="Enter Full Name..."
-              />
-              <input
-                style={{ padding: "5px" }}
-                type="number"
-                name="balance"
-                required="required"
-                placeholder="Amount deposit..."
-              />
-              <br />
-              <button>submit</button>
-            </form>
+            <input
+              style={{ padding: "5px" }}
+              type="number"
+              name="accNumber"
+              required="required"
+              placeholder="Enter Account Number..."
+              onChange={e => setAccNumber(e.target.value)}
+              value={accNumber}
+            />
+            <input
+              style={{ padding: "5px" }}
+              type="number"
+              name="balance"
+              required="required"
+              placeholder="Amount deposit..."
+              onChange={e => setAmount(e.target.value)}
+              value={amount}
+            />
+            <br />
+            <button
+              onClick={() => {
+                props.onSubmit(accNumber, parseInt(amount));
+                toggleModal();
+              }}
+            >
+              submit
+            </button>
             <button className="close-modal" onClick={toggleModal}>
               ✖
             </button>
