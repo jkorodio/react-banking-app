@@ -10,7 +10,7 @@ const Login = () => {
 
   const [home, setHome] = useState(true);
 
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
     let pass = localStorage.getItem("userPassword").replace(/"/g, "");
     let mail = localStorage.getItem("userEmail").replace(/"/g, "");
@@ -24,8 +24,22 @@ const Login = () => {
     } else {
       setHome(!home);
       setFlag(false);
+      localStorage.setItem(
+        "persistence",
+        JSON.stringify({ email: emaillog, password: passwordlog })
+      );
     }
   };
+
+  React.useEffect(() => {
+    const persistLogin = localStorage.getItem("persistence");
+    if (persistLogin) {
+      const parsedPersistLogin = JSON.parse(persistLogin);
+      setEmaillog(parsedPersistLogin.email);
+      setPasswordlog(parsedPersistLogin.password);
+      setHome(false);
+    }
+  }, []);
 
   return (
     <div>
@@ -37,7 +51,7 @@ const Login = () => {
               type="email"
               className="form-control"
               placeholder="Enter email"
-              onChange={event => setEmaillog(event.target.value)}
+              onChange={(event) => setEmaillog(event.target.value)}
             />
           </div>
 
@@ -46,7 +60,7 @@ const Login = () => {
               type="password"
               className="form-control"
               placeholder="Enter password"
-              onChange={event => setPasswordlog(event.target.value)}
+              onChange={(event) => setPasswordlog(event.target.value)}
             />
           </div>
 

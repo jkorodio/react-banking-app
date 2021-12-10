@@ -33,6 +33,9 @@ const Header = () => {
           <li>
             <Link to="/history">History</Link>
           </li>
+          <li>
+            <Link to="/logout">Log out</Link>
+          </li>
         </ul>
       </div>
     </div>
