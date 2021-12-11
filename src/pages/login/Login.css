@@ -1,0 +1,24 @@
+.form-control {
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 3px;
+}
+
+.btn {
+  border-radius: 5px;
+  outline: 0;
+  border: 0;
+  background: rgb(12, 104, 12);
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgb(10, 61, 10);
+}
+
+.red {
+  color: red;
+}

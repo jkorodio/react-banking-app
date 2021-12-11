@@ -132,7 +132,6 @@ const Transaction = () => {
                 }
               });
             });
-
             setTransactionHistory((previous) => {
               const senderName = customers.find(
                 (customer) => customer.accNumber === accNumber
@@ -189,6 +188,10 @@ const Transaction = () => {
             }
             if (doesSenderExist.balance < amount) {
               return toast.error("Not Enough Balance");
+            }
+            const isAmountValid = amount >= 0;
+            if (!isAmountValid) {
+              return toast.error("Invalid Amount");
             }
 
             setCustomers((previous) => {

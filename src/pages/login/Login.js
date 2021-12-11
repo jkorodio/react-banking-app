@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import Home from "../Home";
+import "./Login.css";
 
 const Login = () => {
   const [emaillog, setEmaillog] = useState(" ");
@@ -45,7 +46,7 @@ const Login = () => {
     <div>
       {home ? (
         <Form style={{ padding: "10rem" }} onSubmit={handleLogin}>
-          <h3>LogIn</h3>
+          <h3>Log In</h3>
           <div className="form-group">
             <input
               type="email"
@@ -65,12 +66,12 @@ const Login = () => {
           </div>
 
           <button type="submit" className="btn btn-dark btn-lg btn-block">
-            Login
+            Log In
           </button>
 
           {flag && (
-            <Alert color="primary" variant="warning">
-              Fill correct Info else keep trying.
+            <Alert color="primary" variant="warning" className="red">
+              Wrong email or password, please try again!
             </Alert>
           )}
         </Form>

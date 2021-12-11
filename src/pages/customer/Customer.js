@@ -14,19 +14,19 @@ const getDatafromLS = () => {
 };
 
 const Customer = () => {
-  const [customers, setCustomer] = useState(getDatafromLS());
+  const [customers, setCustomers] = useState(getDatafromLS());
   const [addFormData, setAddFormData] = useState({
     fullName: "",
     email: "",
     accNumber: "",
-    balance: ""
+    balance: "",
   });
 
   const [editFormData, setEditFormData] = useState({
     fullName: "",
     email: "",
     accNumber: "",
-    balance: ""
+    balance: "",
   });
 
   const [editCustomerId, setEditCustomerId] = useState(null);
@@ -35,7 +35,7 @@ const Customer = () => {
     localStorage.setItem("customer", JSON.stringify(customers));
   }, [customers]);
 
-  const handleAddFormChange = event => {
+  const handleAddFormChange = (event) => {
     event.preventDefault();
 
     const fieldName = event.target.getAttribute("name");
@@ -47,7 +47,7 @@ const Customer = () => {
     setAddFormData(newFormData);
   };
 
-  const handleEditFormChange = event => {
+  const handleEditFormChange = (event) => {
     event.preventDefault();
 
     const fieldName = event.target.getAttribute("name");
@@ -59,7 +59,7 @@ const Customer = () => {
     setEditFormData(newFormData);
   };
 
-  const handleAddFormSubmit = event => {
+  const handleAddFormSubmit = (event) => {
     event.preventDefault();
 
     const newCustomer = {
@@ -67,14 +67,14 @@ const Customer = () => {
       fullName: addFormData.fullName,
       email: addFormData.email,
       accNumber: addFormData.accNumber,
-      balance: addFormData.balance
+      balance: addFormData.balance,
     };
 
     const newCustomers = [...customers, newCustomer];
-    setCustomer(newCustomers);
+    setCustomers(newCustomers);
   };
 
-  const handleEditFormSubmit = event => {
+  const handleEditFormSubmit = (event) => {
     event.preventDefault();
 
     const editedCustomer = {
@@ -82,18 +82,18 @@ const Customer = () => {
       fullName: editFormData.fullName,
       email: editFormData.email,
       accNumber: editFormData.accNumber,
-      balance: editFormData.balance
+      balance: editFormData.balance,
     };
 
     const newCustomers = [...customers];
 
     const index = customers.findIndex(
-      customer => customer.id === editCustomerId
+      (customer) => customer.id === editCustomerId
     );
 
     newCustomers[index] = editedCustomer;
 
-    setCustomer(newCustomers);
+    setCustomers(newCustomers);
     setEditCustomerId(null);
   };
 
@@ -105,7 +105,7 @@ const Customer = () => {
       fullName: customer.fullName,
       email: customer.email,
       accNumber: customer.accNumber,
-      balance: customer.balance
+      balance: customer.balance,
     };
 
     setEditFormData(formValues);
@@ -115,14 +115,14 @@ const Customer = () => {
     setEditCustomerId(null);
   };
 
-  const handleDeleteClick = customerId => {
+  const handleDeleteClick = (customerId) => {
     const newCustomers = [...customers];
 
-    const index = customers.findIndex(customer => customer.id === customerId);
+    const index = customers.findIndex((customer) => customer.id === customerId);
 
     newCustomers.splice(index, 1);
 
-    setCustomer(newCustomers);
+    setCustomers(newCustomers);
   };
 
   return (
@@ -136,33 +136,35 @@ const Customer = () => {
           required="required"
           placeholder="Enter Full Name..."
           onChange={handleAddFormChange}
+          className="form-input"
         />
-        <br />
         <input
           type="email"
           name="email"
           required="required"
           placeholder="Enter an E-mail..."
           onChange={handleAddFormChange}
+          className="form-input"
         />
-        <br />
         <input
           type="number"
           name="accNumber"
           required="required"
-          placeholder="Enter a account number..."
+          placeholder="Enter an Account number..."
           onChange={handleAddFormChange}
+          className="form-input"
         />
-        <br />
         <input
           type="number"
           name="balance"
           required="required"
-          placeholder="Enter Balance"
+          placeholder="Enter Balance..."
           onChange={handleAddFormChange}
+          className="form-input"
         />
-        <br />
-        <button type="submit">Add User</button>
+        <button className="user-btn" type="submit">
+          Add User
+        </button>
       </form>
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -176,7 +178,7 @@ const Customer = () => {
             </tr>
           </thead>
           <tbody>
-            {customers.map(customer => (
+            {customers.map((customer) => (
               <>
                 {editCustomerId === customer.id ? (
                   <EditableRow
