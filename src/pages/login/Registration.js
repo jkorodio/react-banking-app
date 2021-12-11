@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import Login from "./Login";
-
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ const Registration = () => {
   const [info, setInfo] = useState(true);
 
   // on form submit...
-  const handleFormSubmit = e => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     if (!name || !email || !password) {
@@ -45,9 +44,9 @@ const Registration = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter Full Name"
+                  placeholder="Full Name"
                   name="name"
-                  onChange={event => setName(event.target.value)}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </div>
 
@@ -55,8 +54,8 @@ const Registration = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Enter email"
-                  onChange={event => setEmail(event.target.value)}
+                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
 
@@ -64,8 +63,8 @@ const Registration = () => {
                 <input
                   type="password"
                   className="form-control"
-                  placeholder="Enter password"
-                  onChange={event => setPassword(event.target.value)}
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
 
@@ -78,16 +77,16 @@ const Registration = () => {
                   style={{
                     color: "red",
                     cursor: "pointer",
-                    textDecoration: "underline"
+                    textDecoration: "underline",
                   }}
                   onClick={handleClick}
                 >
-                  log in
+                  Log in
                 </span>
               </p>
               {flag && (
-                <Alert color="primary" variant="danger">
-                  I got it you are in hurry! But every Field is important!
+                <Alert color="primary" variant="danger" className="red">
+                  Please fill out every field to register.
                 </Alert>
               )}
             </Form>

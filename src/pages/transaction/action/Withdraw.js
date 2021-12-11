@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css";
 
-const Withdraw = props => {
+const Withdraw = (props) => {
   const [modal, setModal] = useState(false);
   const [accNumber, setAccNumber] = useState("");
   const [amount, setAmount] = useState(0);
@@ -34,8 +34,9 @@ const Withdraw = props => {
               name="accNumber"
               required="required"
               placeholder="Enter Account Number..."
-              onChange={e => setAccNumber(e.target.value)}
+              onChange={(e) => setAccNumber(e.target.value)}
               value={accNumber}
+              className="modal-input"
             />
             <input
               style={{ padding: "5px" }}
@@ -43,17 +44,19 @@ const Withdraw = props => {
               name="balance"
               required="required"
               placeholder="Amount withdraw..."
-              onChange={e => setAmount(e.target.value)}
+              onChange={(e) => setAmount(e.target.value)}
               value={amount}
+              className="modal-input"
             />
             <br />
             <button
+              className="wdraw-btn"
               onClick={() => {
                 props.onSubmit(accNumber, parseInt(amount));
                 toggleModal();
               }}
             >
-              submit
+              Confirm
             </button>
             <button className="close-modal" onClick={toggleModal}>
               ✖

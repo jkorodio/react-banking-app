@@ -21,7 +21,7 @@ const Transaction = () => {
     fullName: "",
     email: "",
     accNumber: "",
-    balance: ""
+    balance: "",
   });
   const [editCustomerId, setEditCustomerId] = useState(null);
   const [transactionHistory, setTransactionHistory] = useState(
@@ -41,7 +41,7 @@ const Transaction = () => {
     localStorage.setItem("customer", JSON.stringify(customers));
   }, [customers]);
 
-  const handleEditFormChange = event => {
+  const handleEditFormChange = (event) => {
     event.preventDefault();
 
     const fieldName = event.target.getAttribute("name");
@@ -53,7 +53,7 @@ const Transaction = () => {
     setEditFormData(newFormData);
   };
 
-  const handleEditFormSubmit = event => {
+  const handleEditFormSubmit = (event) => {
     event.preventDefault();
 
     const editedCustomer = {
@@ -61,13 +61,13 @@ const Transaction = () => {
       fullName: editFormData.fullName,
       email: editFormData.email,
       accNumber: editFormData.accNumber,
-      balance: editFormData.balance
+      balance: editFormData.balance,
     };
 
     const newCustomers = [...customers];
 
     const index = customers.findIndex(
-      customer => customer.id === editCustomerId
+      (customer) => customer.id === editCustomerId
     );
 
     newCustomers[index] = editedCustomer;
@@ -84,7 +84,7 @@ const Transaction = () => {
       fullName: customer.fullName,
       email: customer.email,
       accNumber: customer.accNumber,
-      balance: customer.balance
+      balance: customer.balance,
     };
 
     setEditFormData(formValues);
@@ -94,10 +94,10 @@ const Transaction = () => {
     setEditCustomerId(null);
   };
 
-  const handleDeleteClick = customerId => {
+  const handleDeleteClick = (customerId) => {
     const newCustomers = [...customers];
 
-    const index = customers.findIndex(customer => customer.id === customerId);
+    const index = customers.findIndex((customer) => customer.id === customerId);
 
     newCustomers.splice(index, 1);
 
@@ -109,21 +109,21 @@ const Transaction = () => {
       <div className="form2">
         <Deposit
           onSubmit={(accNumber, amount) => {
-            setCustomers(previous => {
-              return previous.map(customer => {
+            setCustomers((previous) => {
+              return previous.map((customer) => {
                 if (customer.accNumber === accNumber) {
                   return {
                     ...customer,
-                    balance: parseInt(customer.balance) + amount
+                    balance: parseInt(customer.balance) + amount,
                   };
                 } else {
                   return customer;
                 }
               });
             });
-            setTransactionHistory(previous => {
+            setTransactionHistory((previous) => {
               const senderName = customers.find(
-                customer => customer.accNumber === accNumber
+                (customer) => customer.accNumber === accNumber
               ).fullName;
               return [...previous, `${senderName} deposit ${amount} pesos`];
             });
@@ -131,21 +131,21 @@ const Transaction = () => {
         />
         <Withdraw
           onSubmit={(accNumber, amount) => {
-            setCustomers(previous => {
-              return previous.map(customer => {
+            setCustomers((previous) => {
+              return previous.map((customer) => {
                 if (customer.accNumber === accNumber) {
                   return {
                     ...customer,
-                    balance: parseInt(customer.balance) - amount
+                    balance: parseInt(customer.balance) - amount,
                   };
                 } else {
                   return customer;
                 }
               });
             });
-            setTransactionHistory(previous => {
+            setTransactionHistory((previous) => {
               const senderName = customers.find(
-                customer => customer.accNumber === accNumber
+                (customer) => customer.accNumber === accNumber
               ).fullName;
               return [...previous, `${senderName} withdraw ${amount} pesos`];
             });
@@ -153,33 +153,33 @@ const Transaction = () => {
         />
         <Transfer
           onSubmit={(senderNumber, receiverNumber, amount) => {
-            setCustomers(previous => {
-              return previous.map(customer => {
+            setCustomers((previous) => {
+              return previous.map((customer) => {
                 if (customer.accNumber === senderNumber) {
                   return {
                     ...customer,
-                    balance: parseInt(customer.balance) - amount
+                    balance: parseInt(customer.balance) - amount,
                   };
                 } else if (customer.accNumber === receiverNumber) {
                   return {
                     ...customer,
-                    balance: parseInt(customer.balance) + amount
+                    balance: parseInt(customer.balance) + amount,
                   };
                 } else {
                   return customer;
                 }
               });
             });
-            setTransactionHistory(previous => {
+            setTransactionHistory((previous) => {
               const senderName = customers.find(
-                customer => customer.accNumber === senderNumber
+                (customer) => customer.accNumber === senderNumber
               ).fullName;
               const receiverName = customers.find(
-                customer => customer.accNumber === receiverNumber
+                (customer) => customer.accNumber === receiverNumber
               ).fullName;
               return [
                 ...previous,
-                `${senderName} transfered ${amount} pesos to ${receiverName}`
+                `${senderName} transferred ${amount} PHP to ${receiverName}`,
               ];
             });
           }}
@@ -196,7 +196,7 @@ const Transaction = () => {
               </tr>
             </thead>
             <tbody>
-              {customers.map(customer => (
+              {customers.map((customer) => (
                 <>
                   {editCustomerId === customer.id ? (
                     <EditableRow
